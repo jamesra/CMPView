@@ -1,5 +1,28 @@
 function [Z, Xcluster, A, cluster] = wfIsodata_ND(X, k, L, I, ON, OC, OS, NO, min_dist)
- 
+
+% This function was retrieved from Matlab's File Exchange.
+% https://www.mathworks.com/matlabcentral/fileexchange/23350-isodata-segmentation-a-modification-to--jose-suau-rodriguez--code--isodata-m-
+
+% This function implements N-D ISODATA algorithm 
+% INPUTS: 
+% X : 2D Nxp array. N observations, p-dimention. 
+% k : maximum number of clusters 
+% OC : threshold of distance for cluster merging 
+% OS : threshold of standart deviation for cluster splitting 
+% L : maximum number of clusters that can be merged at one time 
+% I : maximum number of iterations 
+% ON : threshold of number of samples for cluster elimination 
+% NO : Extra Parameter to automatically answer no to 
+% the request to change any parameters 
+% min_dist : minimum distance between a sample and each cluster center. If 
+% you don't want to eliminate any sample, give it a high value 
+% 
+% OUTPUTS: 
+% A : number of cluster 
+% Z : 1xA vector. Centers for each cluster. 
+% Xcluster : 1xA cell. Observetions in each cluster 
+% cluster : 1xN vector. Cluster labels for each observation
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Parametros interos de la funcion  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
