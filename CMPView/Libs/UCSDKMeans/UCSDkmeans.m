@@ -1,3 +1,9 @@
+%The UCSDKMeans optimized K-Means code is originally from this website:
+%https://cseweb.ucsd.edu/~elkan/fastkmeans.html
+
+%The paper describing this method is:
+%Using the Triangle Inequality to Accelerate k-Means published in Proceedings of the Twentieth International Conference on Machine Learning (ICML'03).
+
 function [centers,mincenter,mindist,q2,quality] = UCSDkmeans(data,initcenters,method)
 % Slightly modified from: http://cseweb.ucsd.edu/~elkan/fastkmeans.html
 % output: final centers
@@ -141,7 +147,7 @@ while nchanged > 0
     diffj = diffj(diffj > 0);
     
     
-     if ((size(diff,1) < n/3 & iteration > 0) && method ~= 3)
+     if ((size(diff,1) < n/3 && iteration > 0) && method ~= 3)
          for j = diffj
              plus = find(mincenter(diff) == j);
              minus = find(oldmincenter(diff) == j);
