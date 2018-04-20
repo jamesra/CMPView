@@ -28,7 +28,10 @@ classdef Control < handle
            %when we delete a CategoryHistogramControl we need to delete the
            %parent or it remains on the view obscuring the histograms we
            %care about
-           disp( ['Deleting: ' num2str(obj.Parent)]);
+           %
+           % Current versions of Matlab do not allow converting handles to
+           % strings
+           %disp( ['Deleting: ' num2str(obj.Parent)]);
            try
             delete(obj.Parent);  
             obj.Parent = []; 

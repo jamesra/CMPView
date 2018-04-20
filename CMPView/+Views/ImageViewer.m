@@ -203,6 +203,10 @@ classdef ImageViewer < Viewer
        function obj = Image_ResizeFcn(obj,src,event)
            
            %Reposition the controls to keep buttons a constant size
+           if isempty(obj.Panel)
+               return 
+           end
+               
            panelSize = get(obj.Panel, 'position'); 
            HeightScale = 1 / panelSize(4);
 

@@ -77,19 +77,26 @@ classdef PixelDataCollection < DataCollection
                   PCACategories = []; 
                   
                   %Figure out which classes are unlocked
-                  for(iCat = 1:length(obj.CategoryObjects))
-                    if(obj.CategoryObjects(iCat).CanRemoveMembers)
-                        iRows = cat(1, iRows, obj.CategoryObjects(iCat).Members);
-                        PCACategories = cat(1,PCACategories,iCat); 
-                    end
+                  if(isempty(obj.CategoryObjects))
+                     %There are no categories so use the entire image as input 
+                     [numRows, ~] = size(obj.Attributes);
+                     iRows = 1:numRows; 
+                  else
+                      %Identify the unlocked categories
+                      for(iCat = 1:length(obj.CategoryObjects))
+                        if(obj.CategoryObjects(iCat).CanRemoveMembers)
+                            iRows = cat(1, iRows, obj.CategoryObjects(iCat).Members);
+                            PCACategories = cat(1,PCACategories,iCat); 
+                        end
+                      end
                   end
-
+                     
                   if(isempty(obj.PrinCompCategories) || ...
                           ~isequal(PCACategories, obj.PrinCompCategories) || ...
                           ~isequal(obj.PCAAttributes, obj.AttributesEnabled))
                      obj.PrinCompCategories = PCACategories;
                      obj.PCAAttributes = obj.AttributesEnabled;
-                     [PCACoeffs, Scores] = princomp(obj.Attributes(iRows,obj.AttributesEnabled));
+                     [PCACoeffs, Scores, Latent] = pca(obj.Attributes(iRows,obj.AttributesEnabled));
                      
                      nAttributes = sum(obj.AttributesEnabled);
                      

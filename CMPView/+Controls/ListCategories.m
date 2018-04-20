@@ -132,7 +132,10 @@ classdef ListCategories < Controls.Control
                    case 'return'
                         obj.Controller.CurrentCollection.CategoryObjects(index).ShowRenameUI();
                    case 'delete'
-                        obj.Controller.CurrentCollection.RemoveCategory(obj.Controller.CurrentCollection.CategoryObjects(index)); 
+                       %Do not delete the unassigned category.
+                       if(~obj.Controller.CurrentCollection.CategoryObjects(index).UnassignedOnly)
+                            obj.Controller.CurrentCollection.RemoveCategory(obj.Controller.CurrentCollection.CategoryObjects(index)); 
+                       end
                    case 'c'
                         obj.Controller.CurrentCollection.CategoryObjects(index).ShowColorUI();
                    case 'add'
